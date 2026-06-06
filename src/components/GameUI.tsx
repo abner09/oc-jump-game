@@ -138,9 +138,27 @@ export default function GameUI({ engine, score, combo, state, chargeRatio }: Pro
   // ---- Game Over ----
   if (state === 'gameover') {
     const layers = engine.current?.currentIdx ?? 0;
+    const charImg = engine.current?.charImg ?? null;
     return (
       <div className="game-overlay">
         <div className="glass-panel p-8 text-center max-w-xs mx-4 animate-slideUp">
+          {/* Dead character — OC lying down (rotated -90°) */}
+          {charImg && (
+            <div className="flex justify-center mb-3">
+              <img
+                src={charImg.src}
+                alt="OC"
+                style={{
+                  width: 64,
+                  height: 'auto',
+                  transform: 'rotate(-90deg)',
+                  transformOrigin: 'center center',
+                  opacity: 0.85,
+                  filter: 'grayscale(0.3)',
+                }}
+              />
+            </div>
+          )}
           <p className="text-sm font-medium text-muted-foreground mb-1">游戏结束</p>
           <div className="score-display text-5xl font-extrabold text-foreground mb-2">
             {score}
