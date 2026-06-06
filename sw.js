@@ -1,7 +1,7 @@
 // OC Jump — Service Worker
 // Cache-first strategy for offline PWA support
 
-const CACHE_NAME = 'oc-jump-v2';
+const CACHE_NAME = 'oc-jump-v3';
 const BASE = self.registration?.scope || './';
 
 // Install: pre-cache app shell
