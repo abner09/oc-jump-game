@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 30% 97%;
+    --foreground: 220 20% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
+    --primary: 12 76% 61%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 200 60% 72%;
+    --secondary-foreground: 220 20% 15%;
+    --muted: 30 15% 92%;
+    --muted-foreground: 220 10% 46%;
+    --accent: 150 45% 68%;
+    --accent-foreground: 220 20% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 15% 90%;
+    --input: 30 15% 90%;
+    --ring: 12 76% 61%;
+    --radius: 0.75rem;
+
+    --game-bg: #f5f0eb;
+    --game-accent: #ff6b6b;
+    --game-gold: #ffd93d;
+    --game-perfect: #ffd93d;
+    --game-nice: #6bcb77;
+    --game-good: #4d96ff;
+    --shadow-soft: 0 8px 32px rgba(0,0,0,0.08);
+    --shadow-card: 0 4px 20px rgba(0,0,0,0.06);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    overscroll-behavior: none;
+  }
+}
+
+@layer components {
+  .game-overlay {
+    @apply absolute inset-0 flex items-center justify-center z-10;
+    pointer-events: none;
+  }
+  .game-overlay > * {
+    pointer-events: auto;
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .score-display {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  .btn-primary {
+    @apply px-8 py-3 rounded-2xl font-semibold text-white transition-all duration-200;
+    background: linear-gradient(135deg, hsl(12, 76%, 61%), hsl(12, 76%, 52%));
+    box-shadow: 0 4px 16px hsla(12, 76%, 61%, 0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px hsla(12, 76%, 61%, 0.4);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-ghost {
+    @apply px-6 py-2.5 rounded-2xl font-medium transition-all duration-200;
+    background: rgba(0,0,0,0.04);
+    color: hsl(220, 20%, 35%);
+  }
+  .btn-ghost:hover {
+    background: rgba(0,0,0,0.08);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsla(12, 76%, 61%, 0.3); }
+  50% { box-shadow: 0 0 0 12px hsla(12, 76%, 61%, 0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes scorePopIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out both;
+}
+.animate-slideUp {
+  animation: slideUp 0.6s ease-out both;
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+.animate-scorePopIn {
+  animation: scorePopIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ---- Mobile responsive ---- */
+@media (max-width: 640px) {
+  .game-overlay .glass-panel {
+    padding: 2rem 1.5rem;
+  }
+  .game-overlay h1 {
+    font-size: 1.75rem;
+  }
+  .game-overlay p {
+    font-size: 0.875rem;
+  }
+  .btn-primary {
+    font-size: 1.125rem;
+    padding: 0.875rem 2rem;
+  }
+  .btn-ghost {
+    font-size: 0.9rem;
+    padding: 0.625rem 1.5rem;
+  }
+  /* Playing HUD */
+  .absolute.top-6 .text-4xl {
+    font-size: 2.75rem;
+  }
+  .absolute.top-6 .text-xs {
+    font-size: 0.8rem;
+  }
+}
