@@ -879,6 +879,14 @@ export class GameEngine {
       }
     }
 
+    // character rides moving platform when standing
+    if (this.jumpPhase === 'idle' || this.jumpPhase === 'charging') {
+      const cp = this.platforms[this.currentIdx];
+      if (cp && cp.moveRange > 0) {
+        this.px = cp.x;
+      }
+    }
+
     this.updateParts(dt);
     this.updatePopups(dt);
     this.updateCam(dt);
